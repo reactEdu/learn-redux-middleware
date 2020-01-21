@@ -9,11 +9,11 @@ const CounterContainer = () => {
   const dispatch = useDispatch();
 
   const onIncrease = () => {
-    dispatch(increase);
+    dispatch(increase());
   }
 
   const onDecrease = () => {
-    dispatch(decrease);
+    dispatch(decrease());
   }
   
   return (
