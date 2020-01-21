@@ -1,6 +1,6 @@
 - npm i redux react-redux
 
-## 작업 순서
+## 리덕스 작업 순서
 - modules 폴더에 파일 생성
   - 액션, 액션생성함수, 리듀서 생성
 - index 파일 생성
