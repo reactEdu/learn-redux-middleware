@@ -1,3 +1,7 @@
+# 목차
+- 이번 파일에서는 리덕스 작업 순서 까지만 다룸
+- [redux thunk 설명](/NOTE/redux_thunk_0.md "redux thunk")
+
 ## 리덕스 작업 순서
 - npm i redux react-redux
 - modules 폴더에 파일 생성
