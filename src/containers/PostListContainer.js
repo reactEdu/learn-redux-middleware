@@ -12,7 +12,8 @@ const PostListContainer = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
-  if(loading) return <div>loading</div>;
+  // 데이터가 있을때(=뒤로가기로 왔을때) loading 표시 안함
+  if(loading && !data) return <div>loading</div>;
   if(error) return <div>error</div>;
   if(!data) return null;
 

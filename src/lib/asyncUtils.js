@@ -20,15 +20,15 @@ export const createPromiseThunk= (type, promiseCreator) =>{
 };
 
 // 리듀서 함수를 반환
-export const handleAsyncActions = (type, key) => {
+export const handleAsyncActions = (type, key, keepData) => {
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`,`${type}_ERROR`];
   return (state, action) => {
     switch (action.type) {
       case type:
         return {
           ...state,
-          [key]: reducerUtils.loading(), // 로딩 이전 값 유지하고 싶으면 prevState를 넣는다.
-        }                                // prevState는 state.posts.data를 의미한다.
+          [key]: reducerUtils.loading(keepData ? state[key].data : null), 
+        } // 3번째 파라미터 keepData로 로딩 이전 값 유지 여부 결정
       case SUCCESS:
         return {
           ...state,
