@@ -1,3 +1,23 @@
+export const createPromiseThunk= (type, promiseCreator) =>{
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`,`${type}_ERROR`];
+
+  const thunkCreator = param => async dispatch => {
+    // 요청 시작
+    dispatch({ type });
+    try {
+      // API 호출
+      const payload = await promiseCreator(param);
+      // 성공했을 때
+      dispatch({ type: SUCCESS, payload });
+    } catch (e) {
+      // 실패했을 때
+      dispatch({ type: ERROR, payload: e, error: true });
+    }
+  }
+
+  return thunkCreator;
+};
+
 export const reducerUtils = {
   initial: (data=null) => ({
     data,
@@ -19,4 +39,4 @@ export const reducerUtils = {
     loading: false,
     error,
   }),
-}
+};
