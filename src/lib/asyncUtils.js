@@ -1,3 +1,4 @@
+// thunk 함수 반환
 export const createPromiseThunk= (type, promiseCreator) =>{
   const [SUCCESS, ERROR] = [`${type}_SUCCESS`,`${type}_ERROR`];
 
@@ -18,6 +19,33 @@ export const createPromiseThunk= (type, promiseCreator) =>{
   return thunkCreator;
 };
 
+// 리듀서 함수를 반환
+export const handleAsyncActions = (type, key) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`,`${type}_ERROR`];
+  return (state, action) => {
+    switch (action.type) {
+      case type:
+        return {
+          ...state,
+          [key]: reducerUtils.loading(), // 로딩 이전 값 유지하고 싶으면 prevState를 넣는다.
+        }                                // prevState는 state.posts.data를 의미한다.
+      case SUCCESS:
+        return {
+          ...state,
+          [key]: reducerUtils.succses(action.payload),
+        }
+      case ERROR:
+        return {
+          ...state,
+          [key]: reducerUtils.error(action.payload),
+        }
+      default:
+        return state
+    }
+  }
+}
+
+// 리듀서에서 사용하는 state 반환
 export const reducerUtils = {
   initial: (data=null) => ({
     data,
